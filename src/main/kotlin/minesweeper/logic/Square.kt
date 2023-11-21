@@ -16,41 +16,44 @@ data class Square(
         if(isRevealed) {
             g2.color = Color(180, 180, 180)
             g2.fillRect(
-                x * (SQUARE_SIZE + SQUARE_MARGIN),
-                y * (SQUARE_SIZE + SQUARE_MARGIN),
+                x * (SQUARE_SIZE + SQUARE_MARGIN) + SQUARE_MARGIN,
+                y * (SQUARE_SIZE + SQUARE_MARGIN) + SQUARE_MARGIN + 70,
                 SQUARE_SIZE,
                 SQUARE_SIZE)
-            if(minesAround > 0) {
+            if(isMine){
+                g2.color = Color.RED
+                g2.drawString("X",
+                    x * (SQUARE_SIZE + SQUARE_MARGIN) + SQUARE_MARGIN,
+                    y * (SQUARE_SIZE + SQUARE_MARGIN) + SQUARE_SIZE - SQUARE_MARGIN + 70)
+            }
+            else if(minesAround > 0) {
                 g2.color = getColor()
                 g2.font = Font("Times New Roman", Font.BOLD, 25)
                 g2.drawString(
                     minesAround.toString(),
                     x * (SQUARE_SIZE + SQUARE_MARGIN) + SQUARE_MARGIN,
-                    y * (SQUARE_SIZE + SQUARE_MARGIN) + SQUARE_SIZE - SQUARE_MARGIN)
+                    y * (SQUARE_SIZE + SQUARE_MARGIN) + SQUARE_SIZE - SQUARE_MARGIN + 70)
             }
         }
         else if(isFlagged){
             g2.color = Color(180, 180, 180)
             g2.fillRect(
-                x * (SQUARE_SIZE + SQUARE_MARGIN),
-                y * (SQUARE_SIZE + SQUARE_MARGIN),
+                x * (SQUARE_SIZE + SQUARE_MARGIN) + SQUARE_MARGIN,
+                y * (SQUARE_SIZE + SQUARE_MARGIN) + SQUARE_MARGIN + 70,
                 SQUARE_SIZE,
                 SQUARE_SIZE)
 
             g2.color = Color.BLACK
             g2.drawString("F",
                 x * (SQUARE_SIZE + SQUARE_MARGIN) + SQUARE_MARGIN,
-                y * (SQUARE_SIZE + SQUARE_MARGIN) + SQUARE_SIZE - SQUARE_MARGIN)
-        }
-        else if(isMine && isRevealed){
-            g2.color = Color.RED
-            g2.drawString("X",
-                x * (SQUARE_SIZE + SQUARE_MARGIN) + SQUARE_MARGIN,
-                y * (SQUARE_SIZE + SQUARE_MARGIN) + SQUARE_SIZE - SQUARE_MARGIN)
+                y * (SQUARE_SIZE + SQUARE_MARGIN) + SQUARE_SIZE - SQUARE_MARGIN + 70)
         }
         else {
             g2.color = Color.GRAY
-            g2.fillRect(x * (SQUARE_SIZE + SQUARE_MARGIN), y * (SQUARE_SIZE + SQUARE_MARGIN), SQUARE_SIZE, SQUARE_SIZE)
+            g2.fillRect(
+                x * (SQUARE_SIZE + SQUARE_MARGIN) + SQUARE_MARGIN,
+                y * (SQUARE_SIZE + SQUARE_MARGIN) + SQUARE_MARGIN + 70,
+                SQUARE_SIZE, SQUARE_SIZE)
         }
     }
 

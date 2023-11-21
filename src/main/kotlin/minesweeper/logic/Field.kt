@@ -53,8 +53,8 @@ class Field(private val width: Int,
     }
 
     fun revealSquare(x: Int, y: Int){
-        if(field[y][x].minesAround < 1) revealEmptySpace(x, y)
         if(field[y][x].isMine) gameLost = true
+        else if(field[y][x].minesAround < 1) revealEmptySpace(x, y)
         field[y][x].isRevealed = true
         revealedSquares++
     }

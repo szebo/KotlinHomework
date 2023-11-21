@@ -8,7 +8,7 @@ class GameWindow(mWidth: Int, mHeight: Int, mMines: Int) : JFrame(){
 
     init {
         defaultCloseOperation = EXIT_ON_CLOSE
-        setSize((mWidth+1)*(SQUARE_SIZE + SQUARE_MARGIN), (mHeight+1)*(SQUARE_SIZE + SQUARE_MARGIN))
+        setSize((mWidth+1)*(SQUARE_SIZE + SQUARE_MARGIN), (mHeight+1)*(SQUARE_SIZE + SQUARE_MARGIN)+70)
         add(gamePanel)
         setLocationRelativeTo(null)
     }
