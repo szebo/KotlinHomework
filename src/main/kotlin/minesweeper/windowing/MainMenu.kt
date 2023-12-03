@@ -1,5 +1,6 @@
 package minesweeper.windowing
 
+import minesweeper.logic.LeaderboardManager
 import java.awt.GridBagConstraints
 import java.awt.GridBagLayout
 import java.awt.event.ActionListener
@@ -16,8 +17,10 @@ class MainMenu(listener: ActionListener) : JPanel() {
     init{
         btStart.addActionListener(listener)
         btExit.addActionListener{
+            LeaderboardManager.saveLeaderboardFile()
             exitProcess(1)
         }
+        btLeaderboard.addActionListener(listener)
 
         layout = GridBagLayout()
         var constraints = GridBagConstraints()

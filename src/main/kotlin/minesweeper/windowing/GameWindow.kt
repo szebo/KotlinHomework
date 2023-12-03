@@ -7,8 +7,8 @@ class GameWindow(mWidth: Int, mHeight: Int, mMines: Int) : JFrame(){
     private val gamePanel = GamePanel(mWidth, mHeight, mMines)
 
     init {
-        defaultCloseOperation = EXIT_ON_CLOSE
-        setSize((mWidth+1)*(SQUARE_SIZE + SQUARE_MARGIN), (mHeight+1)*(SQUARE_SIZE + SQUARE_MARGIN)+70)
+        defaultCloseOperation = DISPOSE_ON_CLOSE
+        setSize((mWidth+1)*(SQUARE_SIZE + SQUARE_MARGIN), (mHeight+1)*(SQUARE_SIZE + 2*SQUARE_MARGIN)+70)
         add(gamePanel)
         setLocationRelativeTo(null)
     }

@@ -25,7 +25,7 @@ class Field(private val width: Int,
     }
 
     fun isGameEnded(): Boolean{
-        gameWon = flaggedSquares+revealedSquares == width*height || revealedSquares == width*height-numberOfMines
+        gameWon = flaggedSquares+revealedSquares == width*height || revealedSquares == width*height-numberOfMines && flaggedSquares == numberOfMines
         return gameLost || gameWon
     }
 
@@ -35,7 +35,7 @@ class Field(private val width: Int,
         while(currentMines < numberOfMines){
             for(y in 0..< height){
                 for(x in 0..< width){
-                    if(!field[y][x].isMine && r.nextInt(10)==1) {
+                    if(!field[y][x].isMine && r.nextInt(10)==1 && currentMines < numberOfMines) {
                         field[y][x].isMine = true
                         currentMines++
                         updateSurroundingsOf(x, y)
@@ -57,6 +57,14 @@ class Field(private val width: Int,
         else if(field[y][x].minesAround < 1) revealEmptySpace(x, y)
         field[y][x].isRevealed = true
         revealedSquares++
+    }
+
+    fun revealWholeField(){
+        for(y in 0..<height){
+            for (x in 0..<width){
+                field[y][x].isRevealed = true
+            }
+        }
     }
 
     private fun revealEmptySpace(x: Int, y:Int){

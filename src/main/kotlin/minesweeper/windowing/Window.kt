@@ -1,5 +1,6 @@
 package minesweeper.windowing
 
+import minesweeper.logic.LeaderboardManager
 import java.awt.CardLayout
 import java.awt.event.ActionEvent
 import java.awt.event.ActionListener
@@ -16,6 +17,7 @@ object Window : JFrame(), ActionListener{
 
     private val mainMenu = MainMenu(this)
     private val setupMenu = SetupMenu(this)
+    private val leaderboard = Leaderboard(this)
 
     init {
         defaultCloseOperation = EXIT_ON_CLOSE
@@ -23,6 +25,8 @@ object Window : JFrame(), ActionListener{
         add(windowPanel)
         windowPanel.add(mainMenu, "mainMenu")
         windowPanel.add(setupMenu, "setupMenu")
+        windowPanel.add(leaderboard, "leaderboard")
+
         setLocationRelativeTo(null)
     }
 
@@ -38,6 +42,13 @@ object Window : JFrame(), ActionListener{
         cards.show(windowPanel, "mainMenu")
     }
 
+    private fun inLeaderboardMenu(){
+        val cards = windowPanel.layout as CardLayout
+        leaderboard.refresh()
+        cardsChanged(leaderboard)
+        cards.show(windowPanel, "leaderboard")
+    }
+
     override fun actionPerformed(e: ActionEvent?) {
         val button = e?.source as JButton
 
@@ -45,12 +56,15 @@ object Window : JFrame(), ActionListener{
             "Back" -> inMainMenu()
             "Start" -> inSetupMenu()
             "Play" -> setupMenu.startGame()
+            "Leaderboard" -> inLeaderboardMenu()
+            "Return" -> inMainMenu()
         }
     }
 
     private fun cardsChanged(current: JPanel) {
         mainMenu.isVisible = false
         setupMenu.isVisible = false
+        leaderboard.isVisible = false
         current.isVisible = true
     }
 }
